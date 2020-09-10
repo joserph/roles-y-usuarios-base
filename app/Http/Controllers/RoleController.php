@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\PermissionFolder\Models\Permission;
 use App\PermissionFolder\Models\Role;
+use App\Http\Requests\AddRoleRequest;
 
 class RoleController extends Controller
 {
@@ -38,9 +39,16 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddRoleRequest $request)
     {
-        return $request->all();
+        $role = Role::create($request->all());
+
+        if($request->get('permission'))
+        {
+            $role->permissions()->sync($request->get('permission'));
+        }
+        return redirect()->route('role.index')
+            ->with('status_success', 'Role guardado con éxito');
     }
 
     /**
