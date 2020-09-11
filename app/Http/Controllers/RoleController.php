@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PermissionFolder\Models\Permission;
 use App\PermissionFolder\Models\Role;
 use App\Http\Requests\AddRoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
 
 class RoleController extends Controller
 {
@@ -68,9 +69,17 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        $permission_role = [];
+        foreach($role->permissions as $permission)
+        {
+            $permission_role[] = $permission->id;
+        }
+        
+        $permissions = Permission::get();
+
+        return view('role.edit', compact('permissions', 'role', 'permission_role'));
     }
 
     /**
@@ -80,9 +89,17 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRoleRequest $request, $id)
     {
-        //
+        $role = Role::find($id);
+        $role->update($request->all());
+
+        if($request->get('permission'))
+        {
+            $role->permissions()->sync($request->get('permission'));
+        }
+        return redirect()->route('role.index')
+            ->with('status_success', 'Role actualizado con éxito');
     }
 
     /**
