@@ -39,7 +39,9 @@
                                             <a href="{{ route('role.edit', $role->id) }}" class="btn btn-warning btn-sm">Editar</a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('role.edit', $role->id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                                            {{ Form::open(['route' => ['role.destroy', $role->id], 'method' => 'DELETE']) }}
+                                                {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar cliente', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el role?")']) }}
+                                            {{ Form::close() }}
                                         </td>
                                     </tr>
                                 @endforeach
