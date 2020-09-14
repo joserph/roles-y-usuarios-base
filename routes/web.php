@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\User;
 use App\PermissionFolder\Models\Role;
 use App\PermissionFolder\Models\Permission;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,41 +29,11 @@ Route::resource('/role', 'RoleController')->names('role');
 
 
 Route::get('/test', function(){
-    //return 'hola';
-    /*return Role::create([
-        'name' => 'Admin',
-        'slug' => 'admin',
-        'description' => 'Administrador',
-        'full-access' => 'yes'
-    ]);*/
+    $user = User::find(2);
 
-    /*return Role::create([
-        'name' => 'Guest',
-        'slug' => 'guest',
-        'description' => 'Guest',
-        'full-access' => 'no'
-    ]);*/
+    //$user->roles()->sync([2]);
+    Gate::authorize('haveaccess', 'role.show');
+    return $user;
 
-    /*return Role::create([
-        'name' => 'Test',
-        'slug' => 'test',
-        'description' => 'Test',
-        'full-access' => 'no'
-    ]);*/
-
-    /*return Permission::create([
-        'name' => 'List product',
-        'slug' => 'product.index',
-        'description' => 'Un usuario puede listar un permiso',
-    ]);*/
-
-    $role = Role::find(2);
-
-    $role->permissions()->sync([1,3]);
-
-    return $role->permissions;
-    //$user->roles()->attach([1,3]);
-    /*$user->roles()->sync([1,2]);
-    return $user->roles;*/
-
+    //return $user->havePermission('role.index');
 });

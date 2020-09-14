@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\PermissionFolder\Traits\UserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, UserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -37,9 +38,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // From here
-    public function roles()
-    {
-        return $this->belongsToMany('App\PermissionFolder\Models\Role')->withTimesTamps();
-    }
+    
 }
