@@ -28,7 +28,7 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            @isset($user->role[0]->name)
+                                            @isset($user->roles[0]->name)
                                                 {{ $user->roles[0]->name }}
                                             @endisset
                                         </td>
@@ -40,7 +40,7 @@
                                         </td>
                                         <td>
                                             {{ Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE']) }}
-                                                {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar cliente', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el user?")']) }}
+                                                {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar usuario', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el user?")']) }}
                                             {{ Form::close() }}
                                         </td>
                                     </tr>

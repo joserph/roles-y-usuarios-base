@@ -47,9 +47,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $roles = Role::orderBy('name', 'ASC')->pluck('name', 'id');
+
+        return view('user.show', compact('user', 'roles'));
+    
     }
 
     /**
@@ -60,7 +63,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        
+        $roles = Role::orderBy('name', 'ASC')->pluck('name', 'id');
+        //dd($roles);
+
+        return view('user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -72,7 +80,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->update($request->all());
+
+        $user->roles()->sync($request->get('roles'));
+
+        return redirect()->route('user.index')
+            ->with('status_success', 'User actualizado con éxito');
     }
 
     /**
@@ -81,8 +96,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return back()->with('status_success', 'Eliminado correctamente');
     }
 }
