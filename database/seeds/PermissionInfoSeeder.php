@@ -128,6 +128,23 @@ class PermissionInfoSeeder extends Seeder
 
         $permissionAll[] = $permission->id;
 
+
+        $permission = Permission::create([
+            'name' => 'Show own user',
+            'slug' => 'userown.show',
+            'description' => 'Un usuario puede ver su propio user',
+        ]);
+
+        $permissionAll[] = $permission->id;
+
+        $permission = Permission::create([
+            'name' => 'Edit own user',
+            'slug' => 'userown.edit',
+            'description' => 'Un usuario puede editar su propio user',
+        ]);
+        
+        $permissionAll[] = $permission->id;
+
         // Table permission_role
         //$rolAdmin->permissions()->sync($permissionAll);
     }

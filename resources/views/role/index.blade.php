@@ -6,7 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Lista de roles
-                    <a href="{{ route('role.create') }}" class="btn btn-primary btn-sm float-right">Crear</a>
+                    @can('haveaccess', 'role.create')
+                        <a href="{{ route('role.create') }}" class="btn btn-primary btn-sm float-right">Crear</a>
+                    @endcan
                 </div>
 
                 <div class="card-body">
@@ -33,15 +35,21 @@
                                         <td>{{ $role->description }}</td>
                                         <td>{{ $role['full-access'] }}</td>
                                         <td>
-                                            <a href="{{ route('role.show', $role->id) }}" class="btn btn-info btn-sm">Ver</a>
+                                            @can('haveaccess', 'role.show')
+                                                <a href="{{ route('role.show', $role->id) }}" class="btn btn-info btn-sm">Ver</a>
+                                            @endcan
                                         </td>
                                         <td>
-                                            <a href="{{ route('role.edit', $role->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                            @can('haveaccess', 'role.edit')
+                                                <a href="{{ route('role.edit', $role->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                            @endcan
                                         </td>
                                         <td>
-                                            {{ Form::open(['route' => ['role.destroy', $role->id], 'method' => 'DELETE']) }}
-                                                {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar cliente', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el role?")']) }}
-                                            {{ Form::close() }}
+                                            @can('haveaccess', 'role.destroy')
+                                                {{ Form::open(['route' => ['role.destroy', $role->id], 'method' => 'DELETE']) }}
+                                                    {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar cliente', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el role?")']) }}
+                                                {{ Form::close() }}
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

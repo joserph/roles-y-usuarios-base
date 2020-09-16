@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\PermissionFolder\Models\Role;
 use App\User;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -15,6 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        Gate::authorize('haveaccess', 'user.index');
+
         $users = User::with('roles')->orderBy('id', 'DESC')->paginate(2);
         //return $users;
         return view('user.index', compact('users'));
@@ -27,7 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        /*$this->authorize('create', User::class);
+        return 'create';*/
     }
 
     /**
@@ -49,6 +53,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view', [$user, ['user.show', 'userown.show']]);
         $roles = Role::orderBy('name', 'ASC')->pluck('name', 'id');
 
         return view('user.show', compact('user', 'roles'));
@@ -64,6 +69,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+
+        $this->authorize('update', [$user, ['user.edit', 'userown.edit']]);
         
         $roles = Role::orderBy('name', 'ASC')->pluck('name', 'id');
         //dd($roles);
@@ -98,6 +105,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        Gate::authorize('haveaccess', 'user.destroy');
+
         $user->delete();
 
         return back()->with('status_success', 'Eliminado correctamente');

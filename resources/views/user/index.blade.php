@@ -33,15 +33,21 @@
                                             @endisset
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.show', $user->id) }}" class="btn btn-info btn-sm">Ver</a>
+                                            @can('view', [$user, ['user.show', 'userown.show']])
+                                                <a href="{{ route('user.show', $user->id) }}" class="btn btn-info btn-sm">Ver</a>
+                                            @endcan
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                            @can('update', [$user, ['user.edit', 'userown.edit']])
+                                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                            @endcan
                                         </td>
                                         <td>
-                                            {{ Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE']) }}
-                                                {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar usuario', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el user?")']) }}
-                                            {{ Form::close() }}
+                                            @can('haveaccess', 'user.destroy')
+                                                {{ Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE']) }}
+                                                    {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar usuario', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el user?")']) }}
+                                                {{ Form::close() }}
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
