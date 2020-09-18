@@ -39,6 +39,9 @@
                         @can('haveaccess', 'user.index')
                             <li class="nav-item"><a href="{{ route('user.index')}}" class="nav-link">Usuarios</a></li>
                         @endcan
+                        @can('haveaccess', 'permission.index')
+                            <li class="nav-item"><a href="{{ route('permission.index')}}" class="nav-link">Permisos</a></li>
+                        @endcan
                     </ul>
 
                     <!-- Right Side Of Navbar -->

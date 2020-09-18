@@ -41,3 +41,5 @@ Route::get('/test', function(){
 Route::resource('/role', 'RoleController')->names('role');
 
 Route::resource('/user', 'UserController', ['except' => ['create', 'store']])->names('user');
+
+Route::resource('/permission', 'PermissionController')->names('permission');
