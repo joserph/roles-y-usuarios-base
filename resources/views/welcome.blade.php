@@ -81,12 +81,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Fresh Flower Cargo
+                    Roles y permisos
                 </div>
 
                 <div class="links">
-                    <a href="#">Fincas</a>
-                    <a href="#">Clientes</a>
+                    <a href="#">Usuarios</a>
+                    <a href="#">Roles</a>
+                    <a href="#">Permisos</a>
                 </div>
             </div>
         </div>
