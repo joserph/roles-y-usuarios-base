@@ -33,15 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @can('haveaccess', 'role.index')
-                            <li class="nav-item"><a href="{{ route('role.index')}}" class="nav-link">Roles</a></li>
-                        @endcan
-                        @can('haveaccess', 'user.index')
-                            <li class="nav-item"><a href="{{ route('user.index')}}" class="nav-link">Usuarios</a></li>
-                        @endcan
-                        @can('haveaccess', 'permission.index')
-                            <li class="nav-item"><a href="{{ route('permission.index')}}" class="nav-link">Permisos</a></li>
-                        @endcan
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -59,7 +51,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -69,7 +61,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>

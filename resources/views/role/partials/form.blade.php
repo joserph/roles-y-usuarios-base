@@ -27,6 +27,7 @@
 <div class="form-group">
     @foreach($permissions as $permission)
     <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <input class="form-check-input" type="checkbox" value="{{ $permission->id }}" id="permission_{{ $permission->id }}" name="permission[]" 
         
         @if(is_array(old('permission')) && in_array("$permission->id", old('permission'))) checked 
