@@ -15,9 +15,9 @@ mix.scripts([
             'resources/js/jquery.js',
             'resources/js/popper.js',
             'resources/js/bootstrap.js',
-            'resources/js/paper-dashboard.js',
+            //'resources/js/paper-dashboard.js',
             ], 'public/js/app.js')
     .styles([
             'resources/css/bootstrap.css',
-            //'resources/css/paper-dashboard.css',
+            'resources/css/flatly.css',
             ], 'public/css/app.css');
