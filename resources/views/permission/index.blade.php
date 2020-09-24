@@ -45,7 +45,7 @@
                                         <td>
                                             @can('haveaccess', 'permission.destroy')
                                                 {{ Form::open(['route' => ['permission.destroy', $permission->id], 'method' => 'DELETE']) }}
-                                                    {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar cliente', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el permission?")']) }}
+                                                    {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar permiso', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el permiso?")']) }}
                                                 {{ Form::close() }}
                                             @endcan
                                         </td>

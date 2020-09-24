@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\PermissionFolder\Models\Permission;
 use App\Http\Requests\AddPermissionRequest;
+use App\Http\Requests\UpdatePermissionRequest;
 
 class PermissionController extends Controller
 {
@@ -77,7 +78,11 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.edit');
+
+        $permission = Permission::find($id);
+        
+        return view('permission.edit', compact('permission'));
     }
 
     /**
@@ -87,9 +92,15 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePermissionRequest $request, $id)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.edit');
+
+        $permission = Permission::find($id);
+        $permission->update($request->all());
+
+        return redirect()->route('permission.index')
+            ->with('status_success', 'Permiso actualizado con éxito');
     }
 
     /**
@@ -98,8 +109,12 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.destroy');
+
+        $permission->delete();
+
+        return back()->with('status_success', 'Eliminado correctamente');
     }
 }
