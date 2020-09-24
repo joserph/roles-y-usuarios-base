@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\PermissionFolder\Models\Permission;
+use App\Http\Requests\AddPermissionRequest;
 
 class PermissionController extends Controller
 {
@@ -30,7 +31,11 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('haveaccess', 'permission.create');
+
+        $permissions = Permission::get();
+
+        return view('permission.create', compact('permissions'));
     }
 
     /**
@@ -39,9 +44,14 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddPermissionRequest $request)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.create');
+
+        $permission = Permission::create($request->all());
+
+        return redirect()->route('permission.index')
+            ->with('status_success', 'Permiso guardado con éxito');
     }
 
     /**
@@ -52,7 +62,11 @@ class PermissionController extends Controller
      */
     public function show($id)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.show');
+
+        $permission = Permission::find($id);
+
+        return view('permission.show', compact('permission'));
     }
 
     /**
