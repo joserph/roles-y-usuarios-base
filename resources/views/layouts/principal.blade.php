@@ -67,7 +67,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link elevation-4">
+    <a href="{{ route('home') }}" class="brand-link elevation-4">
       <img src="{{ asset('img/casa.png') }}"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
@@ -78,19 +78,20 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
+      @guest
+          
+      @else
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{ asset('img/camion.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          @guest
           
-          @else
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-          @endguest
+          
         </div>
       </div>
-
+      @endguest
       <!-- Sidebar Menu -->
       @guest
           
@@ -140,36 +141,9 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Fixed Navbar Layout</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Layout</a></li>
-              <li class="breadcrumb-item active">Fixed Navbar Layout</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
+    
             @yield('content')
-            <!-- /.card -->
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /.content -->
+              
   </div>
   <!-- /.content-wrapper -->
 
