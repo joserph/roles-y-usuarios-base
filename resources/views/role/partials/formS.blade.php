@@ -19,8 +19,8 @@
 <hr>
 <h3>Full Acceso</h3>
 <div class="form-group">
-    <label>{{ Form::radio('full-access', 'yes', true, ['disabled']) }} Si</label>
-    <label>{{ Form::radio('full-access', 'no', true, ['disabled']) }} No</label>
+    <label>{{ Form::radio('full_access', 'yes', true, ['disabled']) }} Si</label>
+    <label>{{ Form::radio('full_access', 'no', true, ['disabled']) }} No</label>
 </div>
 <h3>Lista de Permisos</h3>
 

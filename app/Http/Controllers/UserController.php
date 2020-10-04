@@ -57,6 +57,7 @@ class UserController extends Controller
         $this->authorize('view', [$user, ['user.show', 'userown.show']]);
         $roles = Role::orderBy('name', 'ASC')->pluck('name', 'id');
 
+        //dd($user->roles[0]->name);
         return view('user.show', compact('user', 'roles'));
     
     }
@@ -75,7 +76,7 @@ class UserController extends Controller
         
         $roles = Role::orderBy('name', 'ASC')->pluck('name', 'id');
         //dd($roles);
-
+        
         return view('user.edit', compact('user', 'roles'));
     }
 

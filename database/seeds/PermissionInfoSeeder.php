@@ -40,14 +40,14 @@ class PermissionInfoSeeder extends Seeder
             'name' => 'Admin',
             'slug' => 'admin',
             'description' => 'Administrador',
-            'full-access' => 'yes'
+            'full_access' => 'yes'
         ]);
 
         $rolUser = Role::create([
             'name' => 'Registered User',
             'slug' => 'registered-user',
             'description' => 'Registered User',
-            'full-access' => 'no'
+            'full_access' => 'no'
         ]);
         
         // Table role_user

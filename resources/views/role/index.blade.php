@@ -33,7 +33,7 @@
                                         <td>{{ $role->name }}</td>
                                         <td>{{ $role->slug }}</td>
                                         <td>{{ $role->description }}</td>
-                                        <td>{{ $role['full-access'] }}</td>
+                                        <td>{{ $role->full_access }}</td>
                                         <td>
                                             @can('haveaccess', 'role.show')
                                                 <a href="{{ route('role.show', $role->id) }}" class="btn btn-info btn-sm">Ver</a>

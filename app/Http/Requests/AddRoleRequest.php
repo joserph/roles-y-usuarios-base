@@ -27,7 +27,7 @@ class AddRoleRequest extends FormRequest
             'name' => 'required|max:50|unique:roles,name',
             'slug' => 'required|max:50|unique:roles,slug',
             'description' => '',
-            'full-access' => 'required|in:yes,no',
+            'full_access' => 'required|in:yes,no',
         ];
     }
 }

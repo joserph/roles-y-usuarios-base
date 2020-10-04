@@ -27,7 +27,7 @@ class UpdateRoleRequest extends FormRequest
             'name' => 'required|max:50|unique:roles,name,' . $this->role,
             'slug' => 'required|max:50|unique:roles,slug,' . $this->role,
             'description' => '',
-            'full-access' => 'required|in:yes,no',
+            'full_access' => 'required|in:yes,no',
         ];
     }
 }

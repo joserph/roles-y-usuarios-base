@@ -109,24 +109,30 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @can('haveaccess', 'user.index')
               <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Usuarios</p>
                 </a>
               </li>
+              @endcan
+              @can('haveaccess', 'role.index')
               <li class="nav-item">
                 <a href="{{ route('role.index') }}" class="nav-link">
                   <i class="fas fa-address-book nav-icon"></i>
                   <p>Roles</p>
                 </a>
               </li>
+              @endcan
+              @can('haveaccess', 'permission.index')
               <li class="nav-item">
                 <a href="{{ route('permission.index') }}" class="nav-link">
                   <i class="fas fa-user-lock nav-icon"></i>
                   <p>Permisos</p>
                 </a>
               </li>
+              @endcan
             </ul>
           </li>
           

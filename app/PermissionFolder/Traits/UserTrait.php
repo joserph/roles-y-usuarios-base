@@ -13,7 +13,7 @@ trait UserTrait {
     {
         foreach($this->roles as $role)
         {
-            if($role['full-access'] == 'yes')
+            if($role['full_access'] == 'yes')
             {
                 return true;
             }
