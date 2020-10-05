@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Simple Tables</h1>
+          <h1>Usuarios</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -26,70 +26,59 @@
 <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Simple Full Width Table</h3>
+        <h3 class="card-title">Lista de usuarios</h3>
 
         <div class="card-tools">
-          <ul class="pagination pagination-sm float-right">
-            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-          </ul>
+          {{ $users->links() }}
         </div>
       </div>
+      @include('custom.message')   
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0">
         <table class="table">
           <thead>
             <tr>
-              <th style="width: 10px">#</th>
-              <th>Task</th>
-              <th>Progress</th>
-              <th style="width: 40px">Label</th>
-            </tr>
+              <th class="text-center" scope="col">#</th>
+              <th class="text-center" scope="col">Nombre</th>
+              <th class="text-center" scope="col">Email</th>
+              @can('haveaccess', 'role.index')
+              <th class="text-center" scope="col">Role(s)</th>
+              @endcan
+              <th class="text-center" colspan="3">&nbsp;</th>
+          </tr>
           </thead>
           <tbody>
+            @foreach ($users as $user)
             <tr>
-              <td>1.</td>
-              <td>Update software</td>
-              <td>
-                <div class="progress progress-xs">
-                  <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                </div>
+              <td class="text-center">{{ $user->id }}</td>
+              <td class="text-center">{{ $user->name }}</td>
+              <td class="text-center">{{ $user->email }}</td>
+              @can('haveaccess', 'role.index')
+              <td class="text-center">
+                  @isset($user->roles[0]->name)
+                      {{ $user->roles[0]->name }}
+                  @endisset
               </td>
-              <td><span class="badge bg-danger">55%</span></td>
-            </tr>
-            <tr>
-              <td>2.</td>
-              <td>Clean database</td>
-              <td>
-                <div class="progress progress-xs">
-                  <div class="progress-bar bg-warning" style="width: 70%"></div>
-                </div>
+              @endcan
+              <td width="100px" class="text-center">
+                  @can('view', [$user, ['user.show', 'userown.show']])
+                      <a href="{{ route('user.show', $user->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Ver</a>
+                  @endcan
               </td>
-              <td><span class="badge bg-warning">70%</span></td>
-            </tr>
-            <tr>
-              <td>3.</td>
-              <td>Cron job running</td>
-              <td>
-                <div class="progress progress-xs progress-striped active">
-                  <div class="progress-bar bg-primary" style="width: 30%"></div>
-                </div>
+              <td width="100px" class="text-center">
+                  @can('update', [$user, ['user.edit', 'userown.edit']])
+                      <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Editar</a>
+                  @endcan
               </td>
-              <td><span class="badge bg-primary">30%</span></td>
-            </tr>
-            <tr>
-              <td>4.</td>
-              <td>Fix and squish bugs</td>
-              <td>
-                <div class="progress progress-xs progress-striped active">
-                  <div class="progress-bar bg-success" style="width: 90%"></div>
-                </div>
+              <td width="120px" class="text-center">
+                  @can('haveaccess', 'user.destroy')
+                      {{ Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE']) }}
+                          {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar usuario', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el user?")']) }}
+                      {{ Form::close() }}
+                  @endcan
               </td>
-              <td><span class="badge bg-success">90%</span></td>
             </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -103,68 +92,4 @@
 
 
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Lista de users</div>
-
-                <div class="card-body">
-                    
-                @include('custom.message')   
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" scope="col">#</th>
-                                    <th class="text-center" scope="col">Nombre</th>
-                                    <th class="text-center" scope="col">Email</th>
-                                    @can('haveaccess', 'role.index')
-                                    <th class="text-center" scope="col">Role(s)</th>
-                                    @endcan
-                                    <th class="text-center" colspan="3">Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td>{{ $user->id }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        @can('haveaccess', 'role.index')
-                                        <td>
-                                            @isset($user->roles[0]->name)
-                                                {{ $user->roles[0]->name }}
-                                            @endisset
-                                        </td>
-                                        @endcan
-                                        <td>
-                                            @can('view', [$user, ['user.show', 'userown.show']])
-                                                <a href="{{ route('user.show', $user->id) }}" class="btn btn-info btn-sm">Ver</a>
-                                            @endcan
-                                        </td>
-                                        <td>
-                                            @can('update', [$user, ['user.edit', 'userown.edit']])
-                                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                                            @endcan
-                                        </td>
-                                        <td>
-                                            @can('haveaccess', 'user.destroy')
-                                                {{ Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE']) }}
-                                                    {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar usuario', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el user?")']) }}
-                                                {{ Form::close() }}
-                                            @endcan
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                
-                            </tbody>
-                        </table>
-                        {{ $users->links() }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
