@@ -42,9 +42,9 @@
                      <thead>
                         <tr>
                            <th class="text-center" scope="col">#</th>
-                           <th class="text-center" scope="col">Nombre</th>
-                           <th class="text-center" scope="col">Slug</th>
-                           <th class="text-center" scope="col">Descripción</th>
+                           <th scope="col">Nombre</th>
+                           <th scope="col">Slug</th>
+                           <th scope="col">Descripción</th>
                            <th class="text-center" colspan="3">&nbsp;</th>
                         </tr>
                      </thead>
