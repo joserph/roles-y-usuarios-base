@@ -19,7 +19,7 @@ class PermissionController extends Controller
     {
         Gate::authorize('haveaccess', 'permission.index');
 
-        $permissions = Permission::orderBy('id', 'DESC')->paginate(10);
+        $permissions = Permission::orderBy('id', 'DESC')->paginate(6);
         //dd($permissions);
 
         return view('permission.index', compact('permissions'));
