@@ -25,7 +25,7 @@
          <div class="col-md-12">
             <div class="card">
                <div class="card-header">
-                  <h3 class="card-title">Lista de usuarios</h3>
+                  Lista de usuarios
 
                   <div class="card-tools">
                      {{ $users->links() }}
@@ -74,7 +74,7 @@
                            <td width="120px" class="text-center">
                               @can('haveaccess', 'user.destroy')
                                  {{ Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE']) }}
-                                    {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar usuario', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el user?")']) }}
+                                    {{ Form::button('<i class="fas fa-trash-alt"></i> ' . 'Eliminar', ['type' => 'submit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Eliminar usuario', 'class' => 'btn btn-sm btn-danger', 'onclick' => 'return confirm("¿Seguro de eliminar el usuario?")']) }}
                                  {{ Form::close() }}
                               @endcan
                            </td>

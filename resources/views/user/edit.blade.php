@@ -32,7 +32,7 @@
                      <hr>
                      <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                           {{ Form::submit('<i class="fas fa-trash-alt"></i> ' . 'Actualizar', ['class' => 'btn btn-sm btn-warning']) }}
+                           <button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-sync-alt"></i> Actualizar</button>
                         </div>
                      </div>
                   {{ Form::close() }}
