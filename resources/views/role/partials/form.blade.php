@@ -1,18 +1,18 @@
-<div class="form-group">
+<div class="form-group row">
     {{ Form::label('name', 'Nombre', ['class' => 'col-sm-2 control-label']) }}
-    <div class="col-sm-12">
+    <div class="col-sm-10">
         {{ Form::text('name', null, ['class' => 'form-control']) }}
     </div>
 </div>
-<div class="form-group">
+<div class="form-group row">
     {{ Form::label('slug', 'Slug', ['class' => 'col-sm-2 control-label']) }}
-    <div class="col-sm-12">
+    <div class="col-sm-10">
         {{ Form::text('slug', null, ['class' => 'form-control']) }}
     </div>
 </div>
-<div class="form-group">
+<div class="form-group row">
     {{ Form::label('description', 'Descricción', ['class' => 'col-sm-2 control-label']) }}
-    <div class="col-sm-12">
+    <div class="col-sm-10">
         {{ Form::textarea('description', null, ['class' => 'form-control']) }}
     </div>
 </div>
@@ -22,9 +22,10 @@
     <label>{{ Form::radio('full_access', 'yes') }} Si</label>
     <label>{{ Form::radio('full_access', 'no', true) }} No</label>
 </div>
-<h3>Lista de Permisos</h3>
 
+<h3>Lista de Permisos</h3>
 <div class="form-group">
+    
     @foreach($permissions as $permission)
     <div class="form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -40,7 +41,3 @@
     @endforeach
 </div>
 
-<hr>
-<div class="form-group">
-    {{ Form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
-</div>

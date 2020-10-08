@@ -29,7 +29,7 @@
          <div class="col-md-12">
             <div class="card">
                <div class="card-header">
-                  <h3 class="card-title">Lista de roles</h3>
+                  Lista de roles
 
                   <div class="card-tools">
                      {{ $roles->links() }}
