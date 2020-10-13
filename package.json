@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
+        "@popperjs/core": "^2.5.3",
         "admin-lte": "^3.0.5",
         "bootstrap-switch": "^3.3.4",
         "core-js": "^3.6.5"
