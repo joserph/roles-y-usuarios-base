@@ -14,6 +14,10 @@
 
                     {{ Form::model($permission, ['route' => ['permission.update', $permission->id], 'class' => 'form-horizontal', 'method' => 'PUT']) }}
                         @include('permission.partials.formE')
+                        <hr>
+                        <div class="form-group">
+                            {{ Form::submit('Actualizar', ['class' => 'btn btn-sm btn-warning']) }}
+                        </div>
                     {{ Form::close() }}
                     
                     </div>

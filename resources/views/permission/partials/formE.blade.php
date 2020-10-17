@@ -17,7 +17,3 @@
     </div>
 </div>
 
-<hr>
-<div class="form-group">
-    {{ Form::submit('Actualizar', ['class' => 'btn btn-sm btn-warning']) }}
-</div>

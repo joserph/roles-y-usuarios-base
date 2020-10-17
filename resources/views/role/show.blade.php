@@ -28,7 +28,7 @@
             <div class="card">
             <div class="card-header">
                 
-                <i class="fas fa-text-width"></i>
+                <i class="fas fa-user-lock"></i>
                 Detalle del role
                 
             </div>
@@ -42,8 +42,25 @@
                 <dt class="col-sm-4">Descripcción</dt>
                 <dd class="col-sm-8">{{ $role->description }}</dd>
                 <dt class="col-sm-4">Full acceso</dt>
-                <dd class="col-sm-8">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
-                    sit amet risus.
+                <dd class="col-sm-8">
+                  <label>{{ Form::radio('full_access', 'yes', true, ['disabled']) }} Si</label>
+                  <label>{{ Form::radio('full_access', 'no', true, ['disabled']) }} No</label>
+                </dd>
+                <dt class="col-sm-4">Lista de Permisos</dt>
+                <dd class="col-sm-8">
+                  @foreach($permissions as $permission)
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" disabled value="{{ $permission->id }}" id="permission_{{ $permission->id }}" name="permission[]" 
+                      
+                      @if(is_array(old('permission')) && in_array("$permission->id", old('permission'))) checked 
+                      @elseif(is_array($permission_role) && in_array("$permission->id", $permission_role)) checked
+                      @endif
+                      >
+                      <label class="form-check-label" for="permission_{{ $permission->id }}">
+                          {{ $permission->id }} - {{ $permission->name }} <em>{{ $permission->description }}</em>
+                      </label>
+                  </div>
+                  @endforeach
                 </dd>
                 </dl>
             </div>
@@ -56,29 +73,4 @@
  </section>
 
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Ver role
-                    <a href="{{ route('role.edit', $role->id)}}" class="btn btn-warning btn-sm float-right">Editar</a>
-                    <a href="{{ route('role.index')}}" class="btn btn-info btn-sm float-right">Atras</a>
-                </div>
-
-                <div class="card-body">
-                    
-                   @include('custom.message')
-
-                    
-                    {{ Form::model($role, ['route' => ['role.update', $role->id], 'class' => 'form-horizontal', 'method' => 'PUT']) }}
-                        @include('role.partials.formS')
-                    {{ Form::close() }}
-                    
-                    
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
