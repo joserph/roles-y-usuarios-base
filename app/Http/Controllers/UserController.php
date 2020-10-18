@@ -7,6 +7,9 @@ use App\PermissionFolder\Models\Role;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UpdateUserRequest;
+use Hash;
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Controller\Auth;
 
 class UserController extends Controller
 {
@@ -112,5 +115,25 @@ class UserController extends Controller
         $user->delete();
 
         return back()->with('status_success', 'Eliminado correctamente');
+    }
+
+    public function password()
+    {
+        return view('user.password');
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        if(Hash::check($request->mypassword, \Auth::user()->password)){
+            $user = new User;
+            $user->where('email', '=', \Auth::user()->email)
+                ->update(['password' => bcrypt($request->password)]);
+
+            return redirect()->route('user.index')
+                ->with('status_success', 'Contraseña actualizada con éxito');
+        }else{
+            return redirect()->route('user.index')
+                ->with('status_success', 'Credenciales Incorrectas');
+        }
     }
 }

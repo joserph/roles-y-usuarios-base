@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card card-warning">
                 <div class="card-header">Editar permiso
                 </div>
 
@@ -15,9 +15,11 @@
                     {{ Form::model($permission, ['route' => ['permission.update', $permission->id], 'class' => 'form-horizontal', 'method' => 'PUT']) }}
                         @include('permission.partials.formE')
                         <hr>
-                        <div class="form-group">
-                            {{ Form::submit('Actualizar', ['class' => 'btn btn-sm btn-warning']) }}
-                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                               <button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-sync"></i> Actualizar</button>
+                            </div>
+                         </div>
                     {{ Form::close() }}
                     
                     </div>

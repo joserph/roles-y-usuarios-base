@@ -95,8 +95,7 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Settings</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">Cambio de contraseña</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#password" data-toggle="tab">Cambio de contraseña</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -106,19 +105,8 @@
 
                   <!-- /.tab-pane -->
 
-                  <div class="tab-pane active" id="settings">
-
-                      @include('custom.message')
-
-                    {{ Form::model($user, ['route' => ['user.update', $user->id], 'class' => 'form-horizontal', 'method' => 'PUT']) }}
-                      
-                        @include('user.partials.formP')
-                    {{ Form::close() }}
-
-
-                      
-                  </div>
-                  <div class="tab-pane" id="password">
+                  
+                  <div class="tab-pane active" id="password">
 
                     @include('custom.message')
 

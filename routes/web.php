@@ -41,6 +41,9 @@ Route::get('/test', function(){
 Route::resource('/role', 'RoleController')->names('role');
 
 Route::resource('/user', 'UserController', ['except' => ['create', 'store']])->names('user');
+// Cambio de Contraseña
+Route::get('user/password', 'UserController@password')->name('user.password');
+Route::post('user/updatepassword', 'UserController@updatePassword')->name('user.updatepassword');
 
 Route::resource('/permission', 'PermissionController')->names('permission');
 Auth::routes();
