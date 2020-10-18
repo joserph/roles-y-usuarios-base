@@ -44,6 +44,8 @@ Route::resource('/user', 'UserController', ['except' => ['create', 'store']])->n
 // Cambio de Contraseña
 Route::get('user/password', 'UserController@password')->name('user.password');
 Route::post('user/updatepassword', 'UserController@updatePassword')->name('user.updatepassword');
+// Cambio de imagen de perfil
+Route::post('user/updateprofilepicture', 'UserController@updateProfilePicture');
 
 Route::resource('/permission', 'PermissionController')->names('permission');
 Auth::routes();

@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UpdateUserRequest;
 use Hash;
 use App\Http\Requests\UpdatePasswordRequest;
-use App\Http\Controller\Auth;
+use Auth;
+use App\Http\Requests\UpdateProfilePictureRequest;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -135,5 +137,17 @@ class UserController extends Controller
             return redirect()->route('user.index')
                 ->with('status_success', 'Credenciales Incorrectas');
         }
+    }
+
+    public function updateProfilePicture(UpdateProfilePictureRequest $request)
+    {
+        $name = Str::random(30) . '-' . $request->file('image')->getClientOriginalName();
+        $request->file('image')->move('profiles', $name);
+        $user = new User;
+        $user->where('email', '=', Auth::user()->email)
+            ->update(['profile' => 'profiles/' . $name]);
+
+        return redirect()->route('user.show', Auth::user()->id)
+            ->with('status_success', 'Foto actualizada con éxito');
     }
 }

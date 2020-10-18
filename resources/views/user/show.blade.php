@@ -31,9 +31,26 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="{{ asset('img/camion.png') }}"
+                src="../{{ Auth::user()->profile }}"
                        alt="User profile picture">
                 </div>
+                <div>
+                <form method="POST" action="{{ url('user/updateprofilepicture') }}" enctype="multipart/form-data" >
+                  {{ csrf_field() }}
+                  <div class="form-group">
+                    <label for="">Cambiar foto de perfil</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="" name="image">
+                        <label class="custom-file-label" for="">Subir foto</label>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-sm btn-warning">Actualizar Foto</button>
+                </form>
+                </div>
+                
+                <hr>
 
                 <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
 
