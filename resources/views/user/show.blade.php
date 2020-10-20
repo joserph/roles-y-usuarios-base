@@ -31,7 +31,7 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                src="../{{ Auth::user()->profile }}"
+                src="{{ asset('/profiles') }}/{{ Auth::user()->profile }}"
                        alt="User profile picture">
                 </div>
                 <div>
@@ -46,7 +46,7 @@
                       </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-sm btn-warning">Actualizar Foto</button>
+                  <button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-upload"></i> Actualizar Foto</button>
                 </form>
                 </div>
                 
@@ -130,6 +130,12 @@
                     {{ Form::model($user, ['route' => ['user.update', $user->id], 'class' => 'form-horizontal', 'method' => 'PUT']) }}
                       
                         @include('user.partials.formP')
+                        <hr>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                              <button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-sync"></i> Actualizar</button>
+                            </div>
+                        </div>
                     {{ Form::close() }}
 
 
@@ -142,6 +148,7 @@
                   <form action="{{ url('user/updatepassword') }}" method="POST">
                     {{ csrf_field() }}
                     @include('user.partials.formPass')
+                    <hr>
                     <div class="form-group row">
                       <div class="col-sm-12">
                          <button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-sync"></i> Actualizar</button>

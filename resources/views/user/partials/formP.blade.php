@@ -13,11 +13,3 @@
 </div>
 
 {{ Form::hidden('roles', $user->roles[0]->id)}}
-
-
-<hr>
-<div class="form-group row">
-    <div class="offset-sm-2 col-sm-10">
-        {{ Form::submit('Actualizar', ['class' => 'btn btn-sm btn-warning']) }}
-    </div>
-</div>

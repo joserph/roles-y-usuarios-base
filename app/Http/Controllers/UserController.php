@@ -141,11 +141,17 @@ class UserController extends Controller
 
     public function updateProfilePicture(UpdateProfilePictureRequest $request)
     {
-        $name = Str::random(30) . '-' . $request->file('image')->getClientOriginalName();
-        $request->file('image')->move('profiles', $name);
-        $user = new User;
+        $user = User::find(Auth::user()->id);
+        $file = $request->file('image');
+        //$name = Str::random(30) . '-' . $request->file('image')->getClientOriginalName();
+        $nameImage = 'profile_' . time() . '.' . $file->getClientOriginalExtension();
+        $path = public_path() . '/profiles/';
+        if($file->move($path, $nameImage))
+        {
+            \File::delete(public_path() . '/profiles/' . $user->profile);
+        }
         $user->where('email', '=', Auth::user()->email)
-            ->update(['profile' => 'profiles/' . $name]);
+            ->update(['profile' => $nameImage]);
 
         return redirect()->route('user.show', Auth::user()->id)
             ->with('status_success', 'Foto actualizada con éxito');
